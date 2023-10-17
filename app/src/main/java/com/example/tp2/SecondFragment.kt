@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.tp2.databinding.FragmentSecondBinding
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -35,6 +37,18 @@ class SecondFragment : Fragment() {
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+
+        val args: SecondFragmentArgs by navArgs()
+        val countText = getString(R.string.random_heading, args.nb)
+        binding.textviewHeader.text = countText
+        val random = java.util.Random()
+        var randomNumber = 0
+        if (args.nb > 0) {
+            randomNumber = random.nextInt(args.nb + 1)
+        }
+        binding.textviewRandom.text = randomNumber.toString()
+
+
     }
 
     override fun onDestroyView() {
